@@ -1,49 +1,36 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from typing import Optional
-from bs4 import BeautifulSoup, Tag  # Import Tag type
-from bs4.element import ResultSet
-import requests
-from .models import Product
-from .config import BASE_URL
-from .config import HEADERS
 
-class Parser:
-	def __init__(self, base_url: str = BASE_URL):
-		self.base_url = base_url
-		self.session = requests.Session()
-		self.session.headers = {
-			**HEADERS,
-			"Accept-Language": "en-US,en;q=0.9",
-		}
+class Fetcher:
+    def __init__(self, url: str, class_name: str):
+        self.url = url
+        self.class_name = class_name
+        self.chrome_options = Options()
+        self.chrome_options.add_argument("--headless")  # Run in headless mode
+        self.chrome_options.add_argument("--no-sandbox")
+        self.chrome_options.add_argument("--disable-dev-shm-usage")
+        self.chrome_options.add_argument("--disable-gpu")  # Disable GPU
+        self.chrome_options.add_argument("--log-level=3")  # Suppress logging
+        self.chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+        self.service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
 
-	def fetch_html(self) -> Optional[str]:
-		try:
-			response = self.session.get(self.base_url, timeout=10)
-			response.raise_for_status()
-			if response.status_code != 200:
-				print(f"Error fetching {self.base_url}: {response.status_code} - {response.text}")
-			return response.text
-		except requests.exceptions.RequestException as e:
-			print(f"Error fetching {self.base_url}: {e}")
-			return None
-
-	def parse_product(self, html: str) -> Optional[Product]:
-		soup: BeautifulSoup = BeautifulSoup(html, "html.parser")
-
-		# Explicitly type the elements
-		name_element: Optional[Tag] = soup.find("h1")
-		price_element: Optional[Tag] = soup.select_one(".price")
-
-		# Handle None cases
-		if not name_element or not price_element:
-			return None
-
-		# Type narrowing (mypy now knows these are Tags, not None)
-		name: str = name_element.get_text(strip=True)
-		price_str: str = price_element.get_text(strip=True)
-
-		try:
-			price: float = float(price_str.replace("$", "").replace(",", ""))
-		except ValueError:
-			return None
-
-		return Product(name=name, price=price, url=self.base_url)
+    def fetch_html(self) -> Optional[str]:
+        try:
+            self.driver.get(self.url)
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, self.class_name))
+            )
+            html_content = self.driver.page_source
+            return html_content
+        except Exception as e:
+            print(f"Error fetching {self.url}: {e}")
+            return None
+        finally:
+            self.driver.quit()

@@ -1,30 +1,14 @@
-# program.py
-import sys
-import os
-from typing import Optional
+from scraper import Scraper
+from config import BASE_URL
 
-# Add the project root to Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-try:
-    from src.parser import Parser
-except ImportError:
-    print("Error: Make sure your project structure is correct!")
-    sys.exit(1)
+url = BASE_URL
+class_name = "stamp--caption-wrapper-title"
 
-def main():
-    # Initialize scraper with a test URL
-    # test_url = "http://example.com"  # Replace with your target URL
-    scraper = PriceScraper()
+scraper = Scraper(url, class_name)
+result = scraper.scrape()
 
-    # Fetch HTML
-    html: Optional[str] = scraper.fetch_html()
-
-    if html:
-        print("Successfully fetched HTML:\n")
-        print(html[:2000] + "\n...")  # Print first 2000 chars to avoid flooding
-    else:
-        print("Failed to fetch HTML content")
-
-if __name__ == "__main__":
-    main()
+if result:
+    print(f"Found content: {result}")
+else:
+    print("Content not found.")
