@@ -7,7 +7,7 @@ from typing import Optional
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 try:
-    from src.scraper import PriceScraper
+    from src.parser import Parser
 except ImportError:
     print("Error: Make sure your project structure is correct!")
     sys.exit(1)

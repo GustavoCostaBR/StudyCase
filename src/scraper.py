@@ -1,49 +1,50 @@
-from typing import Optional
-from bs4 import BeautifulSoup, Tag  # Import Tag type
-from bs4.element import ResultSet
-import requests
-from .models import Product
-from .config import BASE_URL
-from .config import HEADERS
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 
-class PriceScraper:
-	def __init__(self, base_url: str = BASE_URL):
-		self.base_url = base_url
-		self.session = requests.Session()
-		self.session.headers = {
-			**HEADERS,
-			"Accept-Language": "en-US,en;q=0.9",
-		}
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-gpu")  # Disable GPU
+chrome_options.add_argument("--log-level=3")  # Suppress logging
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
 
-	def fetch_html(self) -> Optional[str]:
-		try:
-			response = self.session.get(self.base_url, timeout=10)
-			response.raise_for_status()
-			if response.status_code != 200:
-				print(f"Error fetching {self.base_url}: {response.status_code} - {response.text}")
-			return response.text
-		except requests.exceptions.RequestException as e:
-			print(f"Error fetching {self.base_url}: {e}")
-			return None
 
-	def parse_product(self, html: str) -> Optional[Product]:
-		soup: BeautifulSoup = BeautifulSoup(html, "html.parser")
+# Initialize the WebDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
-		# Explicitly type the elements
-		name_element: Optional[Tag] = soup.find("h1")
-		price_element: Optional[Tag] = soup.select_one(".price")
+try:
+	# Fetch the URL
+	driver.get("https://nakup.itesco.cz/groceries/en-GB")
 
-		# Handle None cases
-		if not name_element or not price_element:
-			return None
+	# Wait for the page to load completely
+	# driver.implicitly_wait(10)
+	WebDriverWait(driver, 10).until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "stamp--caption-wrapper-title"))
+    )
 
-		# Type narrowing (mypy now knows these are Tags, not None)
-		name: str = name_element.get_text(strip=True)
-		price_str: str = price_element.get_text(strip=True)
+	# Get the page source
+	html_content = driver.page_source
+	soup = BeautifulSoup(html_content, 'html.parser')
 
-		try:
-			price: float = float(price_str.replace("$", "").replace(",", ""))
-		except ValueError:
-			return None
+	# Find all <h3> elements with the class 'stamp--caption-wrapper-title'
+	h3_elements = soup.find_all('h3', class_='stamp--caption-wrapper-title')
 
-		return Product(name=name, price=price, url=self.base_url)
+	# Print the contents of each found element
+	for h3 in h3_elements:
+		print(h3.get_text())
+
+	driver.save_screenshot('screenshot.png')
+
+
+finally:
+	# Close the WebDriver
+	driver.quit()
