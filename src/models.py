@@ -2,7 +2,10 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class Product(BaseModel):
-    name: str
-    price: float
-    url: str
-    timestamp: datetime = datetime.now()  # Auto-populate timestamp
+    Name: str
+    Price: float
+    PricePerKg: float
+    OfferPrice: float
+    Url: str
+    DateOfOffer: datetime
+    Timestamp: datetime = datetime.now()  # Auto-populate timestamp
