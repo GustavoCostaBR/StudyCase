@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from src.parser import Parser
 from src.models import Product
+from src import config as cfg
 
 class TestParser(unittest.TestCase):
     def setUp(self):
@@ -17,27 +18,28 @@ class TestParser(unittest.TestCase):
         <html>
             <body>
                 <div class='test-class'>
-                    <span class='product-name'>Test Product</span>
-                    <span class='price-per-unit'>10.0</span>
-                    <span class='price-per-kg'>20.0</span>
-                    <span class='offer-price'>15.0</span>
-                    <span class='clubcard-price'>12.0</span>
-                    <span class='offer-dates'>01/01/2023</span>
-                    <span class='clubcard-offer-dates'>02/01/2023</span>
+                    <span class={cfg.SPAN_PRODUCT_NAME_CLASS}>Test Product</span>
+                    <span class={cfg.SPAN_PRICE_PER_UNIT_CLASS}>70,13 Kč</span>
+                    <span class={cfg.SPAN_PRICE_PER_KG_CLASS}>99,90 Kč/kg</span>
+                    <span class={cfg.SPAN_OFFER_PRICE_CLASS}>-41%, předtím 84,90 Kč, teď 49,90 Kč</span>
+                    <span class={cfg.SPAN_CLUBCARD_PRICE_CLASS}>S Clubcard 79.90 Kč, běžná cena 99.90 Kč</span>
+                    <span class={cfg.SPAN_OFFER_DATES_CLASS}>Offer valid until 04/02/2025</span>
+                    <span class={cfg.SPAN_CLUBCARD_OFFER_DATES_CLASS}>Offer valid until 04/02/2025</span>
                 </div>
             </body>
         </html>
         """
         products = self.parser.parse_products(html)
+        print(products)
         self.assertEqual(len(products), 1)
         product = products[0]
         self.assertEqual(product.Name, "Test Product")
-        self.assertEqual(product.Price, 10.0)
-        self.assertEqual(product.PricePerKg, 20.0)
-        self.assertEqual(product.OfferPrice, 15.0)
-        self.assertEqual(product.OfferPriceClubCard, 12.0)
-        self.assertEqual(product.DateOfOffer, datetime(2023, 1, 1))
-        self.assertEqual(product.DateOfOfferClubCard, datetime(2023, 1, 2))
+        self.assertEqual(product.Price, 70.13)
+        self.assertEqual(product.PricePerKg, 99.9)
+        self.assertEqual(product.OfferPrice, 49.9)
+        self.assertEqual(product.OfferPriceClubCard, 79.9)
+        self.assertEqual(product.DateOfOffer, datetime(2025, 2, 4))
+        self.assertEqual(product.DateOfOfferClubCard, datetime(2025, 2, 4))
 
 if __name__ == '__main__':
     unittest.main()

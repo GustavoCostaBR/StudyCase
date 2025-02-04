@@ -2,8 +2,8 @@ from typing import Optional
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime
-from models import Product
-import config as cfg
+from .models import Product
+from . import config as cfg
 
 class Parser:
 	def __init__(self, class_name: str):

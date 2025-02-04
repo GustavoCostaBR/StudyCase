@@ -1,7 +1,7 @@
-from scraper import Scraper
+from .scraper import Scraper
 import yaml
-from config import BASE_URL
-from config import SEARCH_URL
+from .config import BASE_URL
+from .config import SEARCH_URL
 from config import DIV_PRODUCT_DETAILS_CLASS
 
 url = BASE_URL
