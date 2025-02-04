@@ -1,0 +1,216 @@
+- DateOfOffer: &id001 0001-01-01 00:00:00
+  DateOfOfferClubCard: *id001
+  Name: Tesco Jasmine Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 26.9
+  PricePerKg: 53.8
+  Timestamp: &id002 2025-02-04 18:02:05.854831
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Basmati Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 34.9
+  PricePerKg: 69.8
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Long Grain Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 38.9
+  PricePerKg: 38.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-11 00:00:00
+  Name: Vitana Parboiled Rice 8 x 100g
+  OfferPrice: -10.0
+  OfferPriceClubCard: 59.0
+  Price: 74.9
+  PricePerKg: 93.63
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: 2025-02-04 00:00:00
+  DateOfOfferClubCard: *id001
+  Name: Vitana Peeled Long Grain Rice 8 x 100g
+  OfferPrice: 44.9
+  OfferPriceClubCard: -10.0
+  Price: 44.9
+  PricePerKg: 56.13
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Menu Gold Jasmine Rice 2kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 144.9
+  PricePerKg: 72.45
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Menu Gold Jasmine Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 77.9
+  PricePerKg: 77.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Lagris Parboiled Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 74.9
+  PricePerKg: 74.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Giana Jasmine Rice 5kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 319.9
+  PricePerKg: 63.98
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Long Grain Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 43.9
+  PricePerKg: 43.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "M\xFCller Riso Milk Rice 200g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 22.9
+  PricePerKg: 114.5
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Hearty Food Co. Short Grain Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 39.9
+  PricePerKg: 39.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Parboiled Long Grain Rice 4 x 100g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 21.9
+  PricePerKg: 54.75
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Lagris Basmati Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 69.9
+  PricePerKg: 139.8
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "M\xFCller Riso Milk Rice Strawberry 200g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 22.9
+  PricePerKg: 114.5
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-04 00:00:00
+  Name: "Ml\xE9k\xE1rna Kun\xEDn Rice Pudding 175g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: 14.0
+  Price: 25.9
+  PricePerKg: 148.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Giana Basmati Rice 5kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 399.9
+  PricePerKg: 79.98
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Menu Gold Basmati Rice 2kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 194.9
+  PricePerKg: 97.45
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Menu Gold Basmati Rice 1kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 99.9
+  PricePerKg: 99.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Lagris Natural Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 39.9
+  PricePerKg: 79.8
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "M\xFCller Riso Milk Rice Cinnamon 200g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 22.9
+  PricePerKg: 114.5
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Wholegrain Brown Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 24.5
+  PricePerKg: 49.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Milk Rice 200g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 14.9
+  PricePerKg: 74.5
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Lagris Arborio Rice 500g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 64.9
+  PricePerKg: 129.8
+  Timestamp: *id002
+  Url: Unknown

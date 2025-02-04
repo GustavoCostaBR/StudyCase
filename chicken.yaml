@@ -1,0 +1,198 @@
+- DateOfOffer: &id001 0001-01-01 00:00:00
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Breast Fillet RB
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 208.45
+  PricePerKg: 214.9
+  Timestamp: &id002 2025-02-04 17:59:44.951506
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-04 00:00:00
+  Name: Tesco Chicken Wings
+  OfferPrice: -10.0
+  OfferPriceClubCard: 79.0
+  Price: 70.13
+  PricePerKg: 99.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Livers
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 43.21
+  PricePerKg: 84.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: 2025-02-04 00:00:00
+  DateOfOfferClubCard: *id001
+  Name: Tesco Whole Chicken without Giblets
+  OfferPrice: 49.9
+  OfferPriceClubCard: -10.0
+  Price: 75.25
+  PricePerKg: 49.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Thighs
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 60.55
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Lower Thighs Family Pack
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 104.43
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: 2025-02-04 00:00:00
+  DateOfOfferClubCard: *id001
+  Name: "DZ Klatovy Debrec\xEDnka Chicken Ham"
+  OfferPrice: 149.0
+  OfferPriceClubCard: -10.0
+  Price: 14.9
+  PricePerKg: 149.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Backs
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 34.47
+  PricePerKg: 62.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Hearts
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 36.61
+  PricePerKg: 104.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Lower Thighs
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 59.11
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Upper Thighs
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 70.74
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-04 00:00:00
+  Name: Tesco Chicken Quarters Rear RB
+  OfferPrice: -10.0
+  OfferPriceClubCard: 64.0
+  Price: 141.36
+  PricePerKg: 84.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Smoked Chicken Thighs 340g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 44.5
+  PricePerKg: 130.88
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Yum Yum Chicken Flavor 60g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 18.9
+  PricePerKg: 315.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Bottoms
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 125.44
+  PricePerKg: 234.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: DZ Klatovy Chicken Ham Standart Sliced 0.100kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 30.5
+  PricePerKg: 305.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: DZ Klatovy Chicken Junior 400g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 40.9
+  PricePerKg: 102.25
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Minced Chicken Thigh Meat 0.500kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 87.9
+  PricePerKg: 175.8
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-04 00:00:00
+  Name: Tesco Chicken Quarters Back Fresh
+  OfferPrice: -10.0
+  OfferPriceClubCard: 64.0
+  Price: 52.64
+  PricePerKg: 84.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-04 00:00:00
+  Name: "Vod\u0148ansk\xE9 Ku\u0159e Delicatessen Chicken Sausages 280g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: 24.0
+  Price: 28.9
+  PricePerKg: 103.21
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "Vod\u0148ansk\xE9 Ku\u0159e Chicken Soup Mixture 750g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 30.9
+  PricePerKg: 41.2
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "Avok\xE1do Roast Chicken 30g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 16.9
+  PricePerKg: 563.33
+  Timestamp: *id002
+  Url: Unknown

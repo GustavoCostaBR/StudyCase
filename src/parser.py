@@ -33,7 +33,7 @@ class Parser:
 				if nameElement:
 					name = nameElement.get_text(strip=True)
 				else:
-					name = "Unknown"
+					continue
 
 				pricePerUnit, pricePerKg, clubCardPrice, offerPrice = self.extractPrice(productUi)
 
@@ -42,14 +42,21 @@ class Parser:
 					offerDatesText = offerDatesElement.get_text(strip=True)
 					offerDate = self.extractOfferDate(offerDatesText)
 				else:
-					offerDate = None
+					offerDate = datetime.min
 
 				clubCardOfferDatesElement = productUi.find(class_=cfg.SPAN_CLASS_CLUBCARD_OFFER_DATES)
 				if clubCardOfferDatesElement:
 					clubCardOfferDatesText = clubCardOfferDatesElement.get_text(strip=True)
 					clubCardOfferDate = self.extractOfferDate(clubCardOfferDatesText)
+				else:
+					clubCardOfferDate = datetime.min
 
+				if (pricePerUnit == -10.00) and (pricePerKg == -10.00) and (clubCardPrice == -10.00) and (offerPrice == -10.00):
+					continue
 
+				product = Product(
+					Name=name, Price=pricePerUnit, PricePerKg=pricePerKg, OfferPrice=offerPrice, OfferPriceClubCard=clubCardPrice, DateOfOffer=offerDate, DateOfOfferClubCard=clubCardOfferDate, Url="Unknown")
+				products.append(product.model_dump())
 
 			return products
 		return None
@@ -114,4 +121,4 @@ class Parser:
 		if date_match:
 			date_str = date_match.group(1)
 			return datetime.strptime(date_str, "%d/%m/%Y")
-		return None
+		return datetime.min
