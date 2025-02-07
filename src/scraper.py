@@ -1,7 +1,7 @@
 from typing import Optional
-from fetcher import Fetcher
-from parser import Parser
-from models import Product
+from src.fetcher import Fetcher
+from src.parser import Parser
+from src.models import Product
 
 
 class Scraper:

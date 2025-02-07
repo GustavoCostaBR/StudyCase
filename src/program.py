@@ -1,8 +1,8 @@
-from .scraper import Scraper
+from src.scraper import Scraper
 import yaml
-from .config import BASE_URL
-from .config import SEARCH_URL
-from config import DIV_PRODUCT_DETAILS_CLASS
+from src.config import BASE_URL
+from src.config import SEARCH_URL
+from src.config import DIV_PRODUCT_DETAILS_CLASS
 
 url = BASE_URL
 searchUrl = SEARCH_URL
@@ -30,6 +30,6 @@ with open('products.yaml', 'w') as file:
     yaml.dump(result, file)
 
 if result:
-    print(f"Found content: {result}")
+    print(f"Found content")
 else:
     print("Content not found.")

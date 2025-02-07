@@ -2,8 +2,8 @@ from typing import Optional
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime
-from .models import Product
-from . import config as cfg
+from src.models import Product
+import src.config as cfg
 
 class Parser:
 	def __init__(self, class_name: str):
@@ -37,14 +37,14 @@ class Parser:
 
 				pricePerUnit, pricePerKg, clubCardPrice, offerPrice = self.extractPrice(productUi)
 
-				offerDatesElement = productUi.find(class_=cfg.SPAN_CLASS_OFFER_DATES)
+				offerDatesElement = productUi.find(class_=cfg.SPAN_OFFER_DATES_CLASS)
 				if offerDatesElement:
 					offerDatesText = offerDatesElement.get_text(strip=True)
 					offerDate = self.extractOfferDate(offerDatesText)
 				else:
 					offerDate = datetime.min
 
-				clubCardOfferDatesElement = productUi.find(class_=cfg.SPAN_CLASS_CLUBCARD_OFFER_DATES)
+				clubCardOfferDatesElement = productUi.find(class_=cfg.SPAN_CLUBCARD_OFFER_DATES_CLASS)
 				if clubCardOfferDatesElement:
 					clubCardOfferDatesText = clubCardOfferDatesElement.get_text(strip=True)
 					clubCardOfferDate = self.extractOfferDate(clubCardOfferDatesText)
@@ -62,7 +62,7 @@ class Parser:
 		return None
 
 	def extractPrice(self, productUi) -> Optional[tuple[float, float, float, float]]:
-		pricePerUnitElement = productUi.find(class_ = cfg.P_CLASS_PRICE_PER_UNIT)
+		pricePerUnitElement = productUi.find(class_ = cfg.P_PRICE_PER_UNIT_CLASS)
 		if pricePerUnitElement:
 			pricePerUnitText = pricePerUnitElement.get_text(strip=True)
 			pricePerUnitMatch = re.search(r"[\d,]+", pricePerUnitText)
@@ -74,7 +74,7 @@ class Parser:
 		else:
 			pricePerUnit = -10.00
 
-		pricePerKgElement = productUi.find(class_ = cfg.P_CLASS_PRICE_PER_KG)
+		pricePerKgElement = productUi.find(class_ = cfg.P_PRICE_PER_KG_CLASS)
 		if pricePerKgElement:
 			pricePerKgText = pricePerKgElement.get_text(strip=True)
 			price_match = re.search(r"[\d,]+", pricePerKgText)
@@ -90,10 +90,13 @@ class Parser:
 		if clubCardPriceElement:
 			clubCardPriceText = clubCardPriceElement.get_text(strip=True)
 
-			clubCardPriceMatch = re.search(r"Clubcard\s([\d,]+)", clubCardPriceText)
+			clubCardPriceMatch = re.search(r"Clubcard\s*([\d.,]+)", clubCardPriceText)
 			if clubCardPriceMatch:
-				price_str = clubCardPriceMatch.group(1).replace(",", ".")
-				clubCardPrice = float(price_str)
+				price_str = clubCardPriceMatch.group(1).replace(",", ".")  # Clean up and ensure proper decimal format
+				try:
+					clubCardPrice = float(price_str)
+				except ValueError:
+					clubCardPrice = -10.00  # Handle potential conversion errors
 			else:
 				clubCardPrice = -10.00
 		else:

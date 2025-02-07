@@ -1,216 +1,216 @@
 - DateOfOffer: &id001 0001-01-01 00:00:00
   DateOfOfferClubCard: *id001
-  Name: Tesco Jasmine Rice 500g
+  Name: Natural Chicken Steaks Loose
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 26.9
-  PricePerKg: 53.8
-  Timestamp: &id002 2025-02-04 18:02:05.854831
+  Price: 53.73
+  PricePerKg: 214.9
+  Timestamp: &id002 2025-02-07 19:12:56.761825
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Tesco Basmati Rice 500g
+  Name: Tesco Chicken Breast Fillet
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 34.9
-  PricePerKg: 69.8
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Tesco Long Grain Rice 1kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 38.9
-  PricePerKg: 38.9
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: 2025-02-11 00:00:00
-  Name: Vitana Parboiled Rice 8 x 100g
-  OfferPrice: -10.0
-  OfferPriceClubCard: 59.0
-  Price: 74.9
-  PricePerKg: 93.63
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: 2025-02-04 00:00:00
-  DateOfOfferClubCard: *id001
-  Name: Vitana Peeled Long Grain Rice 8 x 100g
-  OfferPrice: 44.9
-  OfferPriceClubCard: -10.0
-  Price: 44.9
-  PricePerKg: 56.13
+  Price: 146.78
+  PricePerKg: 214.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Menu Gold Jasmine Rice 2kg
+  Name: Tesco Chicken Breast Fillet RB
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 144.9
-  PricePerKg: 72.45
+  Price: 208.45
+  PricePerKg: 214.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Menu Gold Jasmine Rice 1kg
+  Name: Tesco Chicken Wings
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 77.9
-  PricePerKg: 77.9
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Lagris Parboiled Rice 1kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 74.9
-  PricePerKg: 74.9
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Giana Jasmine Rice 5kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 319.9
-  PricePerKg: 63.98
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Tesco Long Grain Rice 1kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 43.9
-  PricePerKg: 43.9
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: "M\xFCller Riso Milk Rice 200g"
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 22.9
-  PricePerKg: 114.5
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Hearty Food Co. Short Grain Rice 1kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 39.9
-  PricePerKg: 39.9
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Tesco Parboiled Long Grain Rice 4 x 100g
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 21.9
-  PricePerKg: 54.75
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Lagris Basmati Rice 500g
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 69.9
-  PricePerKg: 139.8
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: "M\xFCller Riso Milk Rice Strawberry 200g"
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 22.9
-  PricePerKg: 114.5
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: 2025-02-04 00:00:00
-  Name: "Ml\xE9k\xE1rna Kun\xEDn Rice Pudding 175g"
-  OfferPrice: -10.0
-  OfferPriceClubCard: 14.0
-  Price: 25.9
-  PricePerKg: 148.0
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Giana Basmati Rice 5kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 399.9
-  PricePerKg: 79.98
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Menu Gold Basmati Rice 2kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 194.9
-  PricePerKg: 97.45
-  Timestamp: *id002
-  Url: Unknown
-- DateOfOffer: *id001
-  DateOfOfferClubCard: *id001
-  Name: Menu Gold Basmati Rice 1kg
-  OfferPrice: -10.0
-  OfferPriceClubCard: -10.0
-  Price: 99.9
+  Price: 70.13
   PricePerKg: 99.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Lagris Natural Rice 500g
+  Name: Tesco Chicken Livers
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 39.9
-  PricePerKg: 79.8
+  Price: 43.21
+  PricePerKg: 84.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: "M\xFCller Riso Milk Rice Cinnamon 200g"
+  Name: Tesco Whole Chicken without Giblets
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 22.9
-  PricePerKg: 114.5
+  Price: 128.03
+  PricePerKg: 84.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Tesco Wholegrain Brown Rice 500g
+  Name: Tesco Chicken Thighs
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 24.5
-  PricePerKg: 49.0
+  Price: 60.55
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-11 00:00:00
+  Name: Tesco Chicken Lower Thighs Family Pack
+  OfferPrice: -10.0
+  OfferPriceClubCard: 79.0
+  Price: 104.43
+  PricePerKg: 119.9
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Tesco Milk Rice 200g
+  Name: "DZ Klatovy Debrec\xEDnka Chicken Ham"
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 14.9
-  PricePerKg: 74.5
+  Price: 20.9
+  PricePerKg: 209.0
   Timestamp: *id002
   Url: Unknown
 - DateOfOffer: *id001
   DateOfOfferClubCard: *id001
-  Name: Lagris Arborio Rice 500g
+  Name: Tesco Chicken Backs
   OfferPrice: -10.0
   OfferPriceClubCard: -10.0
-  Price: 64.9
-  PricePerKg: 129.8
+  Price: 34.47
+  PricePerKg: 62.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Hearts
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 36.61
+  PricePerKg: 104.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-11 00:00:00
+  Name: Tesco Chicken Lower Thighs
+  OfferPrice: -10.0
+  OfferPriceClubCard: 79.0
+  Price: 59.11
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: 2025-02-11 00:00:00
+  Name: Tesco Chicken Upper Thighs
+  OfferPrice: -10.0
+  OfferPriceClubCard: 79.0
+  Price: 70.74
+  PricePerKg: 119.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Quarters Rear RB
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 141.36
+  PricePerKg: 84.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Smoked Chicken Thighs 340g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 44.5
+  PricePerKg: 130.88
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Yum Yum Chicken Flavor 60g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 18.9
+  PricePerKg: 315.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Bottoms
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 125.44
+  PricePerKg: 234.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: DZ Klatovy Chicken Ham Standart Sliced 0.100kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 30.5
+  PricePerKg: 305.0
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: DZ Klatovy Chicken Junior 400g
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 41.9
+  PricePerKg: 104.75
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Minced Chicken Thigh Meat 0.500kg
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 87.9
+  PricePerKg: 175.8
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: Tesco Chicken Quarters Back Fresh
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 52.64
+  PricePerKg: 84.9
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "Vod\u0148ansk\xE9 Ku\u0159e Delicatessen Chicken Sausages 280g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 28.9
+  PricePerKg: 103.21
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "Vod\u0148ansk\xE9 Ku\u0159e Chicken Soup Mixture 750g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 30.9
+  PricePerKg: 41.2
+  Timestamp: *id002
+  Url: Unknown
+- DateOfOffer: *id001
+  DateOfOfferClubCard: *id001
+  Name: "Avok\xE1do Roast Chicken 30g"
+  OfferPrice: -10.0
+  OfferPriceClubCard: -10.0
+  Price: 16.9
+  PricePerKg: 563.33
   Timestamp: *id002
   Url: Unknown
