@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   mongodb:
     image: mongo:latest
@@ -11,6 +10,20 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: examplepassword  # Change in production!
+
+  pricescraperapi:
+    build:
+      context: ./PriceScraperAPI  # Path to the API project's directory
+      dockerfile: Dockerfile  # Name of the Dockerfile for the API project
+    container_name: pricescraperapi_container
+    restart: always
+    ports:
+      - "5000:80"  # Map host port 5000 to container port 80
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development  # Or "Production"
+      MongoDB__ConnectionString: "mongodb://root:examplepassword@mongodb:27017"
+    depends_on:
+      - mongodb
 
 volumes:
   mongodb_data:
