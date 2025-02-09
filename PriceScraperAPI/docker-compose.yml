@@ -13,7 +13,7 @@ services:
 
   pricescraperapi:
     build:
-      context: ./PriceScraperAPI  # Path to the API project's directory
+      context: ./PriceScraperApi/PriceScraperApi  # Path to the API project's directory
       dockerfile: Dockerfile  # Name of the Dockerfile for the API project
     container_name: pricescraperapi_container
     restart: always
