@@ -10,6 +10,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: examplepassword  # Change in production!
+    networks:
+    - mynetwork
 
   pricescraperapi:
     build:
@@ -24,6 +26,12 @@ services:
       MongoDB__ConnectionString: "mongodb://root:examplepassword@mongodb:27017"
     depends_on:
       - mongodb
+    networks:
+    - mynetwork
+    profiles: ["!development"]
 
 volumes:
   mongodb_data:
+
+networks:
+  mynetwork:
