@@ -7,10 +7,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["PriceScraperApi/PriceScraperApi.csproj", "PriceScraperApi/"]
-RUN dotnet restore "PriceScraperApi/PriceScraperApi.csproj"
+COPY ["PriceScraperApi.csproj", "./"]
+RUN dotnet restore "PriceScraperApi.csproj"
 COPY . .
-WORKDIR "/src/PriceScraperApi"
+WORKDIR "/src"
 RUN dotnet build "PriceScraperApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
