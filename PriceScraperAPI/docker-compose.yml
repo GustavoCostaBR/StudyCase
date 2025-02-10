@@ -20,7 +20,7 @@ services:
     container_name: pricescraperapi_container
     restart: always
     ports:
-      - "5000:80"  # Map host port 5000 to container port 80
+      - "5000:8080"  # Map host port 5000 to container port 8080
     environment:
       ASPNETCORE_ENVIRONMENT: Development  # Or "Production"
       MongoDB__ConnectionString: "mongodb://root:examplepassword@mongodb:27017"
