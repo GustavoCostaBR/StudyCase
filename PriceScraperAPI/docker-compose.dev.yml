@@ -13,6 +13,15 @@ services:
     networks:
     - mynetwork
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_container
+    ports:
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI (optional)
+    networks:
+      - mynetwork
+
 volumes:
   mongodb_data:
 
