@@ -38,6 +38,7 @@ builder.Services.AddSingleton<IMongoDatabase>(s =>
 // Register dependencies
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 var app = builder.Build();
 

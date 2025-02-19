@@ -35,10 +35,12 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development  # Or "Production"
       MongoDB__ConnectionString: "mongodb://root:examplepassword@mongodb:27017"
+      RabbitMq__ConnectionString: "amqp://guest:guest@rabbitmq:5672/"  # Add this
     depends_on:
       - mongodb
+      - rabbitmq
     networks:
-    - mynetwork
+      - mynetwork
     profiles: ["!development"]
 
 volumes:
