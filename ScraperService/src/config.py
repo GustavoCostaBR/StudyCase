@@ -1,3 +1,11 @@
+import os
+
+
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "alma.rede")
+RABBITMQ_PORT = 5672
+RABBITMQ_CONNECTION = f"amqp://guest:guest@{RABBITMQ_HOST}:{RABBITMQ_PORT}/"
+
+
 BASE_URL = "https://nakup.itesco.cz/groceries/en-GB"
 SEARCH_URL = "https://nakup.itesco.cz/groceries/en-GB/search?query="
 

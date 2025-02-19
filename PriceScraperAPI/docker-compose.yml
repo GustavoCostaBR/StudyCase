@@ -43,6 +43,18 @@ services:
       - mynetwork
     profiles: ["!development"]
 
+  python_consumer:
+    build:
+      context: .  # Build context is the root of PriceScraperAPI folder
+      dockerfile: Dockerfile.python
+    container_name: python_consumer_container
+    environment:
+      RABBITMQ_HOST: rabbitmq  # When in container, connect to RabbitMQ using the service name
+    depends_on:
+      - rabbitmq
+    networks:
+      - mynetwork
+
 volumes:
   mongodb_data:
 
