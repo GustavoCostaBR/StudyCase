@@ -6,6 +6,8 @@ def start_consumer():
     rabbitmq_host = os.environ.get('RABBITMQ_HOST') or 'localhost' # Default to localhost for local testing
     connection_params = pika.ConnectionParameters(host=rabbitmq_host)
 
+    time.sleep(20) # Wait for RabbitMQ to start
+
     try:
         connection = pika.BlockingConnection(connection_params)
         channel = connection.channel()
