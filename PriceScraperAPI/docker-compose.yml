@@ -22,12 +22,6 @@ services:
       - "15672:15672" # Management UI (optional)
     networks:
       - mynetwork
-    healthcheck: # Add healthcheck
-      test: ["CMD", "rabbitmq-diagnostics", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
 
   pricescraperapi:
     build:
@@ -56,8 +50,7 @@ services:
     environment:
       RABBITMQ_HOST: rabbitmq  # When in container, connect to RabbitMQ using the service name
     depends_on:
-      rabbitmq: # Update depends_on to use healthcheck
-        condition: service_healthy
+      - rabbitmq
     networks:
       - mynetwork
 
