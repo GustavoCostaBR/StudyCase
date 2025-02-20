@@ -1,17 +1,21 @@
-# Use an official Python runtime as a parent image
+# Use the official Python slim image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the dependency file to the working directory
+# Copy the requirements file and install dependencies
 COPY requirement.txt .
 
-# Install any needed packages specified in requirement.txt
-RUN pip install --no-cache-dir -r requirement.txt
+RUN pip install --upgrade pip && pip install -r requirement.txt
 
-# Copy the source code from the src folder into the container
-COPY src/ .
+# Copy the entire project into the container
+COPY . .
 
-# Set the default command to run your consumer script
-CMD ["python", "consumer.py"]
+# Set default environment variables for RabbitMQ connection.
+# These can be overridden by Docker Compose.
+ENV RABBITMQ_HOST=rabbitmq
+ENV RABBITMQ_PORT=5672
+
+# Default command to run the RabbitMQ consumer
+CMD ["python", "src/consumer.py"]
