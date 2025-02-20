@@ -1,21 +1,21 @@
 # Use the official Python slim image
 FROM python:3.9-slim
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
-
-# Copy the requirements file and install dependencies
-COPY requirement.txt .
-
-RUN pip install --upgrade pip && pip install -r requirement.txt
 
 # Copy the entire project into the container
 COPY . .
 
-# Set default environment variables for RabbitMQ connection.
-# These can be overridden by Docker Compose.
+# Install dependencies
+RUN pip install --upgrade pip && pip install -r /app/requirement.txt
+
+# Disable output buffering to ensure logs are visible
+ENV PYTHONUNBUFFERED=1
+
+# Set environment variables for RabbitMQ
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
-# Default command to run the RabbitMQ consumer
+# Run the consumer as a module
 CMD ["python", "-m", "src.consumer"]
