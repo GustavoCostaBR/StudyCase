@@ -18,4 +18,4 @@ ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
 # Default command to run the RabbitMQ consumer
-CMD ["python", "src/consumer.py"]
+CMD ["python", "-m", "src.consumer"]
