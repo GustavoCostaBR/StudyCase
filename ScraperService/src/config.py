@@ -1,9 +1,10 @@
 import os
 
 
-RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "alma.rede")
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "myalma.rede")
 RABBITMQ_PORT = 5672
 RABBITMQ_CONNECTION = f"amqp://guest:guest@{RABBITMQ_HOST}:{RABBITMQ_PORT}/"
+PRICE_SCRAPER_API_ENDPOINT_CREATE = "http://localhost:5280/Products/create-product"
 
 
 BASE_URL = "https://nakup.itesco.cz/groceries/en-GB"

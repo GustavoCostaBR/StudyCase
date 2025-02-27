@@ -37,7 +37,7 @@ namespace PriceScraperApi.Controllers
             return Ok(products);
         }
 
-        [HttpPost]
+        [HttpPost("create-product")]
         public async Task<IActionResult> CreateProduct([FromBody] JsonElement productJson)
         {
             // Deserialize the JsonElement to a Product

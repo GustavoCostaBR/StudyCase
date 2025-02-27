@@ -3,12 +3,24 @@ import json
 import time
 import os
 from src.config import RABBITMQ_HOST, RABBITMQ_PORT
+from src.program import ScraperService
 
 def callback(ch, method, properties, body):
     try:
-        # Assume the message is JSON encoded.
-        message = json.loads(body)
-        print("Received message:", message)
+        # Assume the message is a JSON list of search terms.
+        search_terms = json.loads(body.decode('utf-8'))  # Decode the byte string to a string and parse as JSON
+
+        # Check if search_terms is a list
+        if isinstance(search_terms, list):
+            # Iterate through the list of search terms and call ScraperService.search for each term.
+            for search_term in search_terms:
+                print("Received search term:", search_term)
+                ScraperService.search(search_term)
+        else:
+            print("Received non-list message:", search_terms)
+
+    except json.JSONDecodeError as e:
+        print("Error decoding JSON:", e)
     except Exception as e:
         print("Error processing message:", e)
     finally:
@@ -16,7 +28,7 @@ def callback(ch, method, properties, body):
 
 def start_consumer():
     # Use the connection parameters from config.
-    time.sleep(20)
+    time.sleep(1)
     connection_params = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT)
     connection = pika.BlockingConnection(connection_params)
     channel = connection.channel()
