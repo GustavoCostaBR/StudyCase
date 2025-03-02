@@ -28,5 +28,10 @@ namespace PriceScraperApi.Repositories
         {
             await _products.InsertOneAsync(product);
         }
+        
+        public async Task CreateProducts(IEnumerable<Product> products)
+        {
+            await _products.InsertManyAsync(products);
+        }
     }
 }

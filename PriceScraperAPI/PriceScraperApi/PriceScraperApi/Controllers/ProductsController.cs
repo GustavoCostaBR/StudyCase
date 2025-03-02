@@ -27,6 +27,7 @@ namespace PriceScraperApi.Controllers
             {
                 return NotFound();
             }
+
             return Ok(product);
         }
 
@@ -42,7 +43,7 @@ namespace PriceScraperApi.Controllers
         {
             // Deserialize the JsonElement to a Product
             Product? product;
-            
+
             Console.WriteLine(productJson.ToString());
 
             try
@@ -61,7 +62,38 @@ namespace PriceScraperApi.Controllers
             await _productService.CreateProduct(product);
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
-        
+
+        [HttpPost("create-products")]
+        public async Task<IActionResult> CreateProducts([FromBody] JsonElement productsJson)
+        {
+            List<Product>? products;
+
+            try
+            {
+                products = JsonSerializer.Deserialize<List<Product>>(productsJson.GetRawText());
+                if (products == null || products.Count == 0)
+                {
+                    return BadRequest("Invalid Product data.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Invalid Product data: {ex.Message}");
+            }
+
+            try
+            {
+                await _productService.CreateProducts(products);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+
+
+            return Ok("Products created successfully.");
+        }
+
         [HttpPost("send-products")]
         public async Task<IActionResult> SendProductsToQueue([FromBody] List<string> productNames)
         {
@@ -80,7 +112,7 @@ namespace PriceScraperApi.Controllers
                 return StatusCode(500, $"Failed to send products to the queue: {ex.Message}");
             }
         }
-        
+
         [HttpPost("test-mq")]
         public async Task<IActionResult> TestRabbitMq([FromServices] IRabbitMqService rabbitMqService)
         {
@@ -94,7 +126,5 @@ namespace PriceScraperApi.Controllers
                 return StatusCode(500, $"Failed to connect to RabbitMQ: {ex.Message}");
             }
         }
-
-
     }
 }

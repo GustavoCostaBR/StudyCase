@@ -35,6 +35,12 @@ class Parser:
 				else:
 					continue
 
+				urlElement = productUi.find(class_ = cfg.A_URL_CLASS)
+				if urlElement:
+					url =  cfg.BASE_URL.replace("/groceries/en-GB", urlElement["href"])
+				else:
+					continue 
+				
 				pricePerUnit, pricePerKg, clubCardPrice, offerPrice = self.extractPrice(productUi)
 
 				offerDatesElement = productUi.find(class_=cfg.SPAN_OFFER_DATES_CLASS)
@@ -42,20 +48,20 @@ class Parser:
 					offerDatesText = offerDatesElement.get_text(strip=True)
 					offerDate = self.extractOfferDate(offerDatesText)
 				else:
-					offerDate = datetime.min
+					offerDate = None
 
 				clubCardOfferDatesElement = productUi.find(class_=cfg.SPAN_CLUBCARD_OFFER_DATES_CLASS)
 				if clubCardOfferDatesElement:
 					clubCardOfferDatesText = clubCardOfferDatesElement.get_text(strip=True)
 					clubCardOfferDate = self.extractOfferDate(clubCardOfferDatesText)
 				else:
-					clubCardOfferDate = datetime.min
+					clubCardOfferDate = None
 
-				if (pricePerUnit == -10.00) and (pricePerKg == -10.00) and (clubCardPrice == -10.00) and (offerPrice == -10.00):
+				if (pricePerUnit == None) and (pricePerKg == None) and (clubCardPrice == None) and (offerPrice == None):
 					continue
 
 				product = Product(
-					Name=name, Price=pricePerUnit, PricePerKg=pricePerKg, OfferPrice=offerPrice, OfferPriceClubCard=clubCardPrice, DateOfOffer=offerDate, DateOfOfferClubCard=clubCardOfferDate, Url="Unknown")
+					Name=name, Price=pricePerUnit, PricePerKg=pricePerKg, OfferPrice=offerPrice, OfferPriceClubCard=clubCardPrice, Url = url, DateOfOffer=offerDate, DateOfOfferClubCard=clubCardOfferDate)
 				products.append(product.model_dump())
 
 			return products
@@ -70,9 +76,9 @@ class Parser:
 				price_str = pricePerUnitMatch.group(0).replace(",", ".")
 				pricePerUnit = float(price_str)
 			else:
-				pricePerUnit = -10.00
+				pricePerUnit = None
 		else:
-			pricePerUnit = -10.00
+			pricePerUnit = None
 
 		pricePerKgElement = productUi.find(class_ = cfg.P_PRICE_PER_KG_CLASS)
 		if pricePerKgElement:
@@ -82,9 +88,9 @@ class Parser:
 				price_str = price_match.group(0).replace(",", ".")
 				pricePerKg = float(price_str)
 			else:
-				pricePerKg = -10.00
+				pricePerKg = None
 		else:
-			pricePerKg = -10.00
+			pricePerKg = None
 
 		clubCardPriceElement = productUi.find(class_=cfg.P_CLUBCARD_PRICE_CLASS)
 		if clubCardPriceElement:
@@ -96,11 +102,11 @@ class Parser:
 				try:
 					clubCardPrice = float(price_str)
 				except ValueError:
-					clubCardPrice = -10.00  # Handle potential conversion errors
+					clubCardPrice = None  # Handle potential conversion errors
 			else:
-				clubCardPrice = -10.00
+				clubCardPrice = None
 		else:
-			clubCardPrice = -10.00
+			clubCardPrice = None
 
 		offerPriceElement = productUi.find(class_=cfg.SPAN_OFFER_PRICE_CLASS)
 		if offerPriceElement:
@@ -111,9 +117,9 @@ class Parser:
 				price_str = offerPriceMatches[-1].replace(",", ".")
 				offerPrice = float(price_str)
 			else:
-				offerPrice = -10.00
+				offerPrice = None
 		else:
-			offerPrice = -10.00
+			offerPrice = None
 
 		return pricePerUnit, pricePerKg, clubCardPrice, offerPrice
 
@@ -124,4 +130,4 @@ class Parser:
 		if date_match:
 			date_str = date_match.group(1)
 			return datetime.strptime(date_str, "%d/%m/%Y")
-		return datetime.min
+		return None

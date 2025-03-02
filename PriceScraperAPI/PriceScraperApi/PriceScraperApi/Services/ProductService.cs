@@ -28,5 +28,10 @@ namespace PriceScraperApi.Services
         {
             await _productRepository.CreateProduct(product);
         }
+        
+        public async Task CreateProducts(IEnumerable<Product> products)
+        {
+            await _productRepository.CreateProducts(products);
+        }
     }
 }

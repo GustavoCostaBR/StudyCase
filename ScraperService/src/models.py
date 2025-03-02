@@ -19,7 +19,7 @@ class Product(BaseModel):
         """
         data = self.model_dump(exclude_none=True)
         # Convert datetime objects to ISO format strings
-        if 'DateOfOffer' in data and data['DateOfOffer']:
+        if 'DateOfOffer' in data and data['DateOfOffer']: 
             data['DateOfOffer'] = data['DateOfOffer'].isoformat()
         if 'DateOfOfferClubCard' in data and data['DateOfOfferClubCard']:
             data['DateOfOfferClubCard'] = data['DateOfOfferClubCard'].isoformat()

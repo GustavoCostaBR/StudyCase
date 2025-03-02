@@ -1,5 +1,5 @@
 import requests
-from src.config import PRICE_SCRAPER_API_ENDPOINT_CREATE
+from src.config import PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS
 
 class APICaller:
     """
@@ -22,7 +22,7 @@ class APICaller:
         print("Data being sent to API:", data)
 
         try:
-            response = requests.post(PRICE_SCRAPER_API_ENDPOINT_CREATE, json=data)
+            response = requests.post(PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS, json=data)
             if response.ok:
                 print("POST successful:", response.status_code)
             else:

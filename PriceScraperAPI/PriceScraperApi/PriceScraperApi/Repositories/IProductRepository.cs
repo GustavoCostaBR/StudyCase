@@ -9,5 +9,6 @@ namespace PriceScraperApi.Repositories
         Task<Product> GetProduct(string id);
         Task<IEnumerable<Product>> GetAllProducts();
         Task CreateProduct(Product product);
+        Task CreateProducts(IEnumerable<Product> products);
     }
 }
