@@ -1,43 +1,28 @@
-# Use the official Python slim image
+# Dockerfile.chromiumdriver
 FROM python:3.9-slim
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the entire project into the container
 COPY . .
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --upgrade pip && pip install -r /app/requirement.txt
 
-# Install Chrome dependencies
+# Install Chromium and Chromium-Driver from the same repo
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     xvfb \
     libxi6 \
     libgconf-2-4 \
-    chromium
-
-# RUN apt-get install chromium -y
-
-# Get the major version of Chromium installed
-RUN CHROME_VERSION=$(chromium --version | sed 's/^Chromium //g' | cut -d '.' -f1) && \
-    echo "Chromium major version: $CHROME_VERSION" && \
-    # Get the corresponding ChromeDriver version
-    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" && \
-    CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
-    echo "ChromeDriver version: $CHROMEDRIVER_VERSION" && \
-    # Download ChromeDriver
-    wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
-    # Unzip and install ChromeDriver
-    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin && \
-    chmod +x /usr/local/bin/chromedriver
+    chromium \
+    chromium-driver && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Disable output buffering to ensure logs are visible
 ENV PYTHONUNBUFFERED=1
 
-# Set environment variables for RabbitMQ connection
+# Set environment variables for RabbitMQ
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
