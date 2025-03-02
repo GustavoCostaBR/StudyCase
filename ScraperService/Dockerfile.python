@@ -1,4 +1,4 @@
-# Dockerfile.chromiumdriver
+# Dockerfile.chromium-pinned
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -8,16 +8,27 @@ COPY . .
 # Install Python dependencies
 RUN pip install --upgrade pip && pip install -r /app/requirement.txt
 
-# Install Chromium and Chromium-Driver from the same repo
+# Base packages
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     xvfb \
     libxi6 \
-    libgconf-2-4 \
-    chromium \
-    chromium-driver && \
+    libgconf-2-4 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install a pinned Chromium version (adjust version to what's in your repo)
+RUN apt-get update && apt-get install -y chromium=114.0.5735.198-0ubuntu0.22.04.1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Fetch matching ChromeDriver
+RUN CHROME_VERSION=114 && \
+    echo "Using pinned Chromium version 114.0.5735.198" && \
+    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" && \
+    CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
+    wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
+    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/chromedriver
 
 # Disable output buffering to ensure logs are visible
 ENV PYTHONUNBUFFERED=1
