@@ -1,4 +1,3 @@
-import json
 import requests
 from src.config import PRICE_SCRAPER_API_ENDPOINT_CREATE
 
@@ -17,13 +16,13 @@ class APICaller:
                              Each product is expected to have a `to_json()` method for serialization.
         """
         # Convert each product to a JSON string using the to_json method
-        data = [product.to_json() for product in products]
+        data = [product.to_dictionary() for product in products]
 
         # Print the data being sent to the API
         print("Data being sent to API:", data)
 
         try:
-            response = requests.post(PRICE_SCRAPER_API_ENDPOINT_CREATE, json=json.dumps(data))
+            response = requests.post(PRICE_SCRAPER_API_ENDPOINT_CREATE, json=data)
             if response.ok:
                 print("POST successful:", response.status_code)
             else:

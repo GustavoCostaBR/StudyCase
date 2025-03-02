@@ -16,22 +16,22 @@ public class Product
     public decimal Price { get; set; }
 
     [BsonElement("PricePerKg")]
-    public decimal PricePerKg { get; set; }
+    public decimal? PricePerKg { get; set; }
 
     [BsonElement("OfferPrice")]
-    public decimal OfferPrice { get; set; }
+    public decimal? OfferPrice { get; set; }
 
     [BsonElement("OfferPriceClubCard")]
-    public decimal OfferPriceClubCard { get; set; }
+    public decimal? OfferPriceClubCard { get; set; }
 
     [BsonElement("Url")]
     public string Url { get; set; } = string.Empty; // Added default value
 
     [BsonElement("DateOfOffer")]
-    public DateTime DateOfOffer { get; set; }
+    public DateTime? DateOfOffer { get; set; }
 
     [BsonElement("DateOfOfferClubCard")]
-    public DateTime DateOfOfferClubCard { get; set; }
+    public DateTime? DateOfOfferClubCard { get; set; }
 
     [BsonElement("Timestamp")]
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;

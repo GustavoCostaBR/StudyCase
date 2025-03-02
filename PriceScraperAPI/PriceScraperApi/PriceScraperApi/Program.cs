@@ -11,6 +11,11 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.SetMinimumLevel(LogLevel.Error);
+
 // Add services to the container.
 builder.Services.AddControllers(); // Required for API controllers
 builder.Services.AddEndpointsApiExplorer();

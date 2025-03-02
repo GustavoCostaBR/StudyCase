@@ -42,6 +42,8 @@ namespace PriceScraperApi.Controllers
         {
             // Deserialize the JsonElement to a Product
             Product? product;
+            
+            Console.WriteLine(productJson.ToString());
 
             try
             {
