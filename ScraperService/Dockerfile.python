@@ -1,7 +1,10 @@
+# Use the official Python slim image
 FROM python:3.9-slim
 
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy the entire project into the container
 COPY . .
 
 # Install dependencies
@@ -16,31 +19,25 @@ RUN apt-get update && apt-get install -y \
     libgconf-2-4 \
     chromium
 
-# Install Chrome
-RUN apt-get install chromium -y
+# RUN apt-get install chromium -y
 
-# Get Chrome version
-RUN CHROME_VERSION=$(chromium --version | sed 's/^Chromium //g' | cut -d '.' -f1)
-
-# Download ChromeDriver based on Chrome version
-RUN wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.chromium.org/downloads/version?version=${CHROME_VERSION}"
-
-# Extract ChromeDriver version from the downloaded file
-RUN CHROMEDRIVER_VERSION=$(cat /tmp/version | awk -F 'ChromeDriver ' '{print $2}')
-
-# Download ChromeDriver
-RUN wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-
-# Unzip ChromeDriver
-RUN unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin
-
-# Make ChromeDriver executable
-RUN chmod +x /usr/local/bin/chromedriver
+# Get the major version of Chromium installed
+RUN CHROME_VERSION=$(chromium --version | sed 's/^Chromium //g' | cut -d '.' -f1) && \
+    echo "Chromium major version: $CHROME_VERSION" && \
+    # Get the corresponding ChromeDriver version
+    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" && \
+    CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
+    echo "ChromeDriver version: $CHROMEDRIVER_VERSION" && \
+    # Download ChromeDriver
+    wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
+    # Unzip and install ChromeDriver
+    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/chromedriver
 
 # Disable output buffering to ensure logs are visible
 ENV PYTHONUNBUFFERED=1
 
-# Set environment variables for RabbitMQ
+# Set environment variables for RabbitMQ connection
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
