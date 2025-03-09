@@ -1,61 +1,24 @@
-# Use a slim Python image as a base
-FROM python:3.9-slim
+# Use seleniumbase/chrome as a base image, which already includes Chrome and ChromeDriver
+FROM seleniumbase/chrome:latest
 
-# Set working directory
+# Set working directory (already set in seleniumbase/chrome, but good to keep for clarity)
 WORKDIR /app
 
 # Copy your project into the container
 COPY . .
 
-# Install required system packages and dependencies for Chrome
-RUN apt-get update -y && apt-get install -y \
-    wget \
-    unzip \
-    ca-certificates \
-    libxss1 \
-    libappindicator1 \
-    libgconf-2-4 \
-    fonts-liberation \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libnspr4 \
-    libnss3 \
-    libx11-xcb1 \
-    libxtst6 \
-    lsb-release \
-    xdg-utils && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install Python dependencies from requirement.txt
+# You should have a requirement.txt with your python dependencies in the same folder as your Dockerfile
+RUN pip install --upgrade pip && pip install -r requirement.txt
 
-# Set up Google Chrome’s repository and install the stable Chrome browser
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update -y && \
-    apt-get install -y google-chrome-stable && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Determine Chrome’s version and download the matching ChromeDriver
-RUN BROWSER_VERSION=$(google-chrome --version | sed 's/Google Chrome //g') && \
-    BROWSER_MAJOR=$(echo $BROWSER_VERSION | cut -d '.' -f1) && \
-    echo "Installed Chrome version: $BROWSER_VERSION" && \
-    echo "Chrome major version: $BROWSER_MAJOR" && \
-    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${BROWSER_MAJOR}" && \
-    CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
-    echo "Matching ChromeDriver version: $CHROMEDRIVER_VERSION" && \
-    wget -q -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
-    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/chromedriver && \
-    rm /tmp/chromedriver_linux64.zip /tmp/chromedriver_version
-
-# Install Python dependencies (Selenium, etc.)
-RUN pip install --upgrade pip && pip install selenium
-
-# Ensure Python output is unbuffered (good for logging)
+# Set environment variables for Python output buffering (good practice for logging in containers)
 ENV PYTHONUNBUFFERED=1
-# (Optional) Define the path for ChromeDriver if needed by your code
-ENV CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
 
-ENV PYTHONUNBUFFERED=1
+# No need to define CHROMEDRIVER_PATH, it's already in PATH in seleniumbase/chrome image
+
+# Set environment variables for RabbitMQ connection (if needed, these can also be passed via docker-compose)
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
+# Command to run your Python consumer script. Adjust "src/consumer.py" to your script's path
 CMD ["python", "-m", "src.consumer"]
