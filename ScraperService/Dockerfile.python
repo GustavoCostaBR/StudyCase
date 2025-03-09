@@ -22,6 +22,7 @@ ENV PATH="/opt/chrome/chrome-headless-shell-linux64:$PATH"
 # Download and install stable ChromeDriver version 134.0.6998.35.
 RUN wget -q -O /tmp/chromedriver-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.35/linux64/chromedriver-linux64.zip" && \
     unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin && \
+    mv /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
     chmod +x /usr/local/bin/chromedriver && \
     rm /tmp/chromedriver-linux64.zip
 
