@@ -1,37 +1,58 @@
-# Dockerfile.google-chrome
+# Use a slim Python image as a base
 FROM python:3.9-slim
 
+# Set working directory
 WORKDIR /app
+
+# Copy your project into the container
 COPY . .
 
-# Install Python dependencies.
-RUN pip install --upgrade pip && pip install -r /app/requirement.txt
-
-# Install required tools and GPG.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install required system packages and dependencies for Chrome
+RUN apt-get update -y && apt-get install -y \
     wget \
-    gnupg2 \
     unzip \
-    xvfb \
-    libxi6 \
-    libgconf-2-4 && \
+    ca-certificates \
+    libxss1 \
+    libappindicator1 \
+    libgconf-2-4 \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libnspr4 \
+    libnss3 \
+    libx11-xcb1 \
+    libxtst6 \
+    lsb-release \
+    xdg-utils && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Add Google’s repository and install Google Chrome stable.
+# Set up Google Chrome’s repository and install the stable Chrome browser
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && apt-get install -y google-chrome-stable && \
+    apt-get update -y && \
+    apt-get install -y google-chrome-stable && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Fetch matching ChromeDriver.
-RUN CHROME_VERSION=$(google-chrome --version | sed 's/^Google Chrome //g' | cut -d '.' -f1) && \
-    echo "Google Chrome major version: $CHROME_VERSION" && \
-    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" && \
+# Determine Chrome’s version and download the matching ChromeDriver
+RUN BROWSER_VERSION=$(google-chrome --version | sed 's/Google Chrome //g') && \
+    BROWSER_MAJOR=$(echo $BROWSER_VERSION | cut -d '.' -f1) && \
+    echo "Installed Chrome version: $BROWSER_VERSION" && \
+    echo "Chrome major version: $BROWSER_MAJOR" && \
+    wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${BROWSER_MAJOR}" && \
     CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
-    echo "ChromeDriver version: $CHROMEDRIVER_VERSION" && \
-    wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
-    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin && \
-    chmod +x /usr/local/bin/chromedriver
+    echo "Matching ChromeDriver version: $CHROMEDRIVER_VERSION" && \
+    wget -q -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
+    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/ && \
+    chmod +x /usr/local/bin/chromedriver && \
+    rm /tmp/chromedriver_linux64.zip /tmp/chromedriver_version
+
+# Install Python dependencies (Selenium, etc.)
+RUN pip install --upgrade pip && pip install selenium
+
+# Ensure Python output is unbuffered (good for logging)
+ENV PYTHONUNBUFFERED=1
+# (Optional) Define the path for ChromeDriver if needed by your code
+ENV CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
 
 ENV PYTHONUNBUFFERED=1
 ENV RABBITMQ_HOST=rabbitmq
