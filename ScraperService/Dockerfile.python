@@ -1,41 +1,40 @@
-# Dockerfile.chromium-pinned
+# Dockerfile.google-chrome
 FROM python:3.9-slim
 
 WORKDIR /app
-
 COPY . .
 
-# Install Python dependencies
+# Install Python dependencies.
 RUN pip install --upgrade pip && pip install -r /app/requirement.txt
 
-# Base packages
-RUN apt-get update && apt-get install -y \
+# Install required tools and GPG.
+RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
+    gnupg2 \
     unzip \
     xvfb \
     libxi6 \
     libgconf-2-4 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install a pinned Chromium version (adjust version to what's in your repo)
-RUN apt-get update && apt-get install -y chromium=114.0.5735.198-0ubuntu0.22.04.1 && \
+# Add Google’s repository and install Google Chrome stable.
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Fetch matching ChromeDriver
-RUN CHROME_VERSION=114 && \
-    echo "Using pinned Chromium version 114.0.5735.198" && \
+# Fetch matching ChromeDriver.
+RUN CHROME_VERSION=$(google-chrome --version | sed 's/^Google Chrome //g' | cut -d '.' -f1) && \
+    echo "Google Chrome major version: $CHROME_VERSION" && \
     wget -q -O /tmp/chromedriver_version "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" && \
     CHROMEDRIVER_VERSION=$(cat /tmp/chromedriver_version) && \
+    echo "ChromeDriver version: $CHROMEDRIVER_VERSION" && \
     wget -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
     unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin && \
     chmod +x /usr/local/bin/chromedriver
 
-# Disable output buffering to ensure logs are visible
 ENV PYTHONUNBUFFERED=1
-
-# Set environment variables for RabbitMQ
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
-# Run the consumer as a module
 CMD ["python", "-m", "src.consumer"]
