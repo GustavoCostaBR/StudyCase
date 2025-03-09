@@ -1,4 +1,3 @@
-# Use the official SeleniumBase Dockerfile as a starting point.  GOOD!
 FROM ubuntu:22.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV PYTHONUNBUFFERED=1
@@ -107,19 +106,26 @@ RUN rm -rf /var/lib/apt/lists/*
 #=====================
 # Set up SeleniumBase
 #=====================
-#  REMOVED: Don't copy the SeleniumBase source code.  Install via pip instead.
-# COPY sbase /SeleniumBase/sbase/
-# COPY seleniumbase /SeleniumBase/seleniumbase/
-# COPY examples /SeleniumBase/examples/
-# COPY integrations /SeleniumBase/integrations/
-# COPY requirements.txt /SeleniumBase/requirements.txt
-# COPY setup.py /SeleniumBase/setup.py
-# COPY MANIFEST.in /SeleniumBase/MANIFEST.in
-# COPY pytest.ini /SeleniumBase/pytest.ini
-# COPY setup.cfg /SeleniumBase/setup.cfg
-# COPY virtualenv_install.sh /SeleniumBase/virtualenv_install.sh
-# RUN find . -name '*.pyc' -delete
+COPY sbase /SeleniumBase/sbase/
+COPY seleniumbase /SeleniumBase/seleniumbase/
+COPY examples /SeleniumBase/examples/
+COPY integrations /SeleniumBase/integrations/
+COPY requirements.txt /SeleniumBase/requirements.txt
+COPY setup.py /SeleniumBase/setup.py
+COPY MANIFEST.in /SeleniumBase/MANIFEST.in
+COPY pytest.ini /SeleniumBase/pytest.ini
+COPY setup.cfg /SeleniumBase/setup.cfg
+COPY virtualenv_install.sh /SeleniumBase/virtualenv_install.sh
+RUN find . -name '*.pyc' -delete
 RUN pip install --upgrade pip setuptools wheel
+RUN cd /SeleniumBase && ls && pip install -r requirements.txt --upgrade
+RUN cd /SeleniumBase && pip install .
+RUN pip install pyautogui
+
+#=======================
+# Download chromedriver
+#=======================
+RUN seleniumbase get chromedriver --path
 
 # ADDED: Set working directory.  VERY IMPORTANT.
 WORKDIR /app
@@ -127,29 +133,12 @@ WORKDIR /app
 # ADDED: Copy *your* project's files into the container.
 COPY . .
 
-# MODIFIED: Install SeleniumBase *and* your project's dependencies.
-RUN pip install seleniumbase
+# MODIFIED: Install your project's dependencies.
 RUN pip install -r requirement.txt
-
-#=======================
-# Download chromedriver
-#=======================
-#  REMOVED: Let SeleniumBase handle ChromeDriver.
-# RUN seleniumbase get chromedriver --path
-
-#==========================================
-# Create entrypoint and grab example tests
-#==========================================
-#  REMOVED/MODIFIED: Keep the entrypoint, but simplify it.
-# COPY integrations/docker/docker-entrypoint.sh /
-# COPY integrations/docker/run_docker_test_in_chrome.sh /
-# RUN chmod +x *.sh
-#  Simplified entrypoint (just sets up the environment)
-# ENTRYPOINT ["/bin/bash", "-c"]
-ENTRYPOINT ["/bin/bash", "-o", "pipefail", "-c"]
-# MODIFIED:  Run your consumer script directly.
-CMD ["python", "-m", "src.consumer"]
 
 # ADDED: Environment variables for RabbitMQ connection.
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
+
+# MODIFIED:  Run your consumer script directly.
+CMD ["python", "-m", "src.consumer"]
