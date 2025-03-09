@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from typing import Optional
+import os
+
 
 class Fetcher:
 	def __init__(self, url: str, class_name: str):
@@ -16,12 +18,13 @@ class Fetcher:
 		self.chrome_options.add_argument("--no-sandbox")
 		self.chrome_options.add_argument("--disable-dev-shm-usage")
 		self.chrome_options.add_argument("--disable-gpu")  # Disable GPU
-		self.chrome_options.add_argument("--log-level=3")  # Suppress logging
+		self.chrome_options.add_argument("--log-level=3")    # Suppress logging
 		self.chrome_options.add_argument("--enable-unsafe-webgl")  # Enable unsafe WebGL
-		self.chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-		self.service = Service(ChromeDriverManager().install())
-		self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
-
+		self.chrome_options.add_argument(
+			"user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+			"(KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+		)
+		# Check environment for CHROMEDRIVER_PATH before using webdriver_manager.
 		driver_path = os.environ.get("CHROMEDRIVER_PATH")
 		if driver_path:
 			print(f"Using ChromeDriver from environment: {driver_path}")
@@ -30,6 +33,7 @@ class Fetcher:
 			print("No CHROMEDRIVER_PATH specified. Using webdriver_manager to install driver.")
 			self.service = Service(ChromeDriverManager().install())
 		self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
+
 
 	def fetch_html(self) -> Optional[str]:
 		try:
