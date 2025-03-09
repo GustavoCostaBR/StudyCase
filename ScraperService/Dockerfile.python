@@ -26,6 +26,7 @@ RUN wget -q -O /tmp/chromedriver-linux64.zip "https://storage.googleapis.com/chr
     chmod +x /usr/local/bin/chromedriver && \
     rm /tmp/chromedriver-linux64.zip
 
+ENV CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
 ENV PYTHONUNBUFFERED=1
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672

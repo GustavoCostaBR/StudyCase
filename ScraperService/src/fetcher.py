@@ -22,6 +22,15 @@ class Fetcher:
 		self.service = Service(ChromeDriverManager().install())
 		self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
 
+		driver_path = os.environ.get("CHROMEDRIVER_PATH")
+		if driver_path:
+			print(f"Using ChromeDriver from environment: {driver_path}")
+			self.service = Service(driver_path)
+		else:
+			print("No CHROMEDRIVER_PATH specified. Using webdriver_manager to install driver.")
+			self.service = Service(ChromeDriverManager().install())
+		self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
+
 	def fetch_html(self) -> Optional[str]:
 		try:
 			self.driver.get(self.url)
