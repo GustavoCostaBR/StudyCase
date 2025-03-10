@@ -1,50 +1,35 @@
-# Dockerfile.chromium-headless
-FROM python:3.9-slim
+# Use Selenium’s official standalone Chrome image as the base.
+FROM selenium/standalone-chrome:latest
 
-WORKDIR /app
-COPY . .
+# Switch to root to install additional packages.
+USER root
 
-# Install Python dependencies.
-RUN pip install --upgrade pip && pip install -r /app/requirement.txt
-
-# Install required tools and additional libraries.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    unzip \
-    libnss3 \
-    libx11-6 \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxi6 \
-    libxtst6 \
-    libgbm1 \
-    libglib2.0-0 && \
-    libdbus-1-3 && \
+# Install Python 3 and pip.
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Download and install the headless shell version for Chrome (134.0.6998.35).
-RUN wget -q -O /tmp/chrome-headless-shell.zip "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.35/linux64/chrome-headless-shell-linux64.zip" && \
-    unzip /tmp/chrome-headless-shell.zip -d /opt/chrome && \
-    rm /tmp/chrome-headless-shell.zip
+# Create a symlink so that "python" points to "python3".
+RUN ln -s /usr/bin/python3 /usr/local/bin/python
 
-# Add headless shell to PATH.
-ENV PATH="/opt/chrome/chrome-headless-shell-linux64:$PATH"
+# Set the working directory.
+WORKDIR /app
 
-RUN ln -s /opt/chrome/chrome-headless-shell-linux64/chrome-headless-shell /usr/local/bin/chrome
+# Copy your project files into the container.
+COPY . .
 
-# Download and install stable ChromeDriver version 134.0.6998.35.
-RUN wget -q -O /tmp/chromedriver-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.35/linux64/chromedriver-linux64.zip" && \
-    unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin && \
-    mv /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver && \
-    rm /tmp/chromedriver-linux64.zip
+# Install Python dependencies from your requirements file.
+RUN pip3 install --upgrade pip && pip3 install -r requirement.txt
 
-ENV CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
+# Set environment variables.
 ENV PYTHONUNBUFFERED=1
 ENV RABBITMQ_HOST=rabbitmq
 ENV RABBITMQ_PORT=5672
 
+# Optionally set the ChromeDriver path if your code expects it.
+# In selenium/standalone-chrome images, ChromeDriver is typically located at /opt/selenium/chromedriver.
+ENV CHROMEDRIVER_PATH=/opt/selenium/chromedriver
+
+# Run your consumer module.
 CMD ["python", "-m", "src.consumer"]
