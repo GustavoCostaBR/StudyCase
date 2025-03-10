@@ -29,6 +29,8 @@ class Fetcher:
 		try:
 			if driver_path:
 				print(f"Using ChromeDriver from environment: {driver_path}")
+				# Explicitly set Chrome binary location.
+				self.chrome_options.binary_location = "/usr/bin/google-chrome"
 				self.service = Service(driver_path)
 			else:
 				print("No CHROMEDRIVER_PATH specified. Using webdriver_manager to install driver.")
