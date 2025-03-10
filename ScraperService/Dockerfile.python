@@ -19,6 +19,8 @@ RUN wget -q -O /tmp/chrome-headless-shell.zip "https://storage.googleapis.com/ch
 # Add headless shell to PATH.
 ENV PATH="/opt/chrome/chrome-headless-shell-linux64:$PATH"
 
+RUN ln -s /opt/chrome/chrome-headless-shell-linux64/chrome-headless-shell /usr/local/bin/chrome
+
 # Download and install stable ChromeDriver version 134.0.6998.35.
 RUN wget -q -O /tmp/chromedriver-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.35/linux64/chromedriver-linux64.zip" && \
     unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin && \
