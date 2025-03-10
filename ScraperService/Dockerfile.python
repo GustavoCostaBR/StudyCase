@@ -19,8 +19,15 @@ WORKDIR /app
 # Copy your project files into the container.
 COPY . .
 
-# Install Python dependencies from your requirements file.
-RUN pip3 install --upgrade pip && pip3 install -r requirement.txt
+# Create a virtual environment
+RUN python3 -m venv /app/venv
+
+# Activate the virtual environment and install dependencies
+RUN /app/venv/bin/pip install --upgrade pip && \
+    /app/venv/bin/pip install -r requirement.txt
+
+# Update PATH so that the virtual environment’s binaries are used by default
+ENV PATH="/app/venv/bin:$PATH"
 
 # Set environment variables.
 ENV PYTHONUNBUFFERED=1
