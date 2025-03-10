@@ -26,13 +26,22 @@ class Fetcher:
 		)
 		# Check environment for CHROMEDRIVER_PATH before using webdriver_manager.
 		driver_path = os.environ.get("CHROMEDRIVER_PATH")
-		if driver_path:
-			print(f"Using ChromeDriver from environment: {driver_path}")
-			self.service = Service(driver_path)
-		else:
-			print("No CHROMEDRIVER_PATH specified. Using webdriver_manager to install driver.")
-			self.service = Service(ChromeDriverManager().install())
-		self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
+		try:
+			if driver_path:
+				print(f"Using ChromeDriver from environment: {driver_path}")
+				self.service = Service(driver_path)
+			else:
+				print("No CHROMEDRIVER_PATH specified. Using webdriver_manager to install driver.")
+				self.service = Service(ChromeDriverManager().install())
+			self.driver = webdriver.Chrome(service=self.service, options=self.chrome_options)
+
+			# Print Chrome and ChromeDriver versions
+			print(f"Chrome version: {self.driver.capabilities['browserVersion']}")
+			print(f"ChromeDriver version: {self.driver.capabilities['chrome']['chromedriverVersion']}")
+
+		except Exception as e:
+			print(f"Error initializing WebDriver: {e}")
+			raise  # Re-raise the exception to prevent further execution
 
 
 	def fetch_html(self) -> Optional[str]:
