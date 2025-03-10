@@ -37,7 +37,7 @@ ENV RABBITMQ_PORT=5672
 
 # Optionally set the ChromeDriver path if your code expects it.
 # In selenium/standalone-chrome images, ChromeDriver is typically located at /opt/selenium/chromedriver.
-ENV CHROMEDRIVER_PATH=/opt/selenium/chromedriver
+ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 
 # Run your consumer module.
 CMD ["python", "-m", "src.consumer"]
