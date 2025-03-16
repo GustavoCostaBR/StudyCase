@@ -4,8 +4,14 @@ import os
 RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "myalma.rede")
 RABBITMQ_PORT = 5672
 RABBITMQ_CONNECTION = f"amqp://guest:guest@{RABBITMQ_HOST}:{RABBITMQ_PORT}/"
-PRICE_SCRAPER_API_ENDPOINT_CREATE = "http://localhost:5280/Products/create-product"
-PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS = "http://localhost:5280/Products/create-products"
+PRICE_SCRAPER_API_ENDPOINT_CREATE = os.environ.get(
+    "PRICE_SCRAPER_API_ENDPOINT_CREATE", 
+    "http://localhost:5280/Products/create-product"
+)
+PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS = os.environ.get(
+    "PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS", 
+    "http://localhost:5280/Products/create-products"
+)
 
 
 BASE_URL = "https://nakup.itesco.cz/groceries/en-CZ"
