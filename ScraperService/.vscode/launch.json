@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Module (src.consumer)",
+            "type": "python",
+            "request": "launch",
+            "module": "src.consumer",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "RABBITMQ_HOST": "myalma.rede",
+                "RABBITMQ_PORT": "5672"
+            }
+        }
+    ]
+}

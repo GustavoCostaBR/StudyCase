@@ -8,8 +8,8 @@ PRICE_SCRAPER_API_ENDPOINT_CREATE = "http://localhost:5280/Products/create-produ
 PRICE_SCRAPER_API_ENDPOINT_CREATE_PRODUCTS = "http://localhost:5280/Products/create-products"
 
 
-BASE_URL = "https://nakup.itesco.cz/groceries/en-GB"
-SEARCH_URL = "https://nakup.itesco.cz/groceries/en-GB/search?query="
+BASE_URL = "https://nakup.itesco.cz/groceries/en-CZ"
+SEARCH_URL = "https://nakup.itesco.cz/groceries/en-CZ/search?query="
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
@@ -20,12 +20,12 @@ HEADERS = {
 }
 
 # DIV_CONTAINER_CLASS = "styles__StyledTiledContent-dvv1wj-3 bUXuqC"
-DIV_PRODUCT_DETAILS_CLASS = "product-details--wrapper"
-SPAN_PRODUCT_NAME_CLASS = "styled__Text-sc-1i711qa-1 jGVLws ddsweb-link__text"
-SPAN_OFFER_PRICE_CLASS = "offer-text"
-P_CLUBCARD_PRICE_CLASS = "text__StyledText-sc-1jpzi8m-0 kYYaYX ddsweb-text styled__ContentText-sc-1d7lp92-8 bQebOp ddsweb-value-bar__content-text"
-SPAN_OFFER_DATES_CLASS = "dates"
-SPAN_CLUBCARD_OFFER_DATES_CLASS = "text__StyledText-sc-1jpzi8m-0 ldCcMf ddsweb-text styled__TermsText-sc-1d7lp92-9 fhmvSB ddsweb-value-bar__terms"
-P_PRICE_PER_UNIT_CLASS = "styled__StyledHeading-sc-119w3hf-2 iMxPSd styled__Text-sc-8qlq5b-1 enpJuv beans-price__text"
-P_PRICE_PER_KG_CLASS = "styled__StyledFootnote-sc-119w3hf-7 bdDwjP styled__Subtext-sc-8qlq5b-2 gKiziO beans-price__subtext"
-A_URL_CLASS = "styled__Anchor-sc-1i711qa-0 gJVSxB ddsweb-link__anchor"
+DIV_PRODUCT_DETAILS_CLASS = "WL_DZ"
+SPAN_PRODUCT_NAME_CLASS = "styled__Text-sc-1i711qa-1 bsLJsh ddsweb-link__text"
+SPAN_OFFER_PRICE_CLASS = "component__StyledHeading-sc-1t0ixqu-0 iDJPjF ddsweb-heading styled__PromoMessage-sc-hltpoc-0 bCvWmI"
+P_CLUBCARD_PRICE_CLASS = "text__StyledText-sc-1jpzi8m-0 gljcji ddsweb-text styled__ContentText-sc-1d7lp92-9 cDKKKz ddsweb-value-bar__content-text"
+SPAN_OFFER_DATES_CLASS = "text__StyledText-sc-1jpzi8m-0 kiGrpI ddsweb-text styled__TermsMessage-sc-hltpoc-1 eZgyeS"
+SPAN_CLUBCARD_OFFER_DATES_CLASS = "text__StyledText-sc-1jpzi8m-0 ggFawa ddsweb-text styled__TermsText-sc-1d7lp92-10 dCWOwo ddsweb-value-bar__terms"
+P_PRICE_PER_UNIT_CLASS = "text__StyledText-sc-1jpzi8m-0 gyHOWz ddsweb-text styled__PriceText-sc-v0qv7n-1 cXlRF"
+P_PRICE_PER_KG_CLASS = "text__StyledText-sc-1jpzi8m-0 kiGrpI ddsweb-text styled__Subtext-sc-v0qv7n-2 kLkheV ddsweb-price__subtext"
+A_URL_CLASS = "styled__Anchor-sc-1i711qa-0 gRXcDF ddsweb-title-link__link ddsweb-link__anchor"

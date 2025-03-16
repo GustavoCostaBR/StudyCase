@@ -2,31 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Debug Current Test (unittest)",
+            "name": "Python: Debug Module (src.consumer)",
             "type": "python",
             "request": "launch",
-            "module": "unittest",
+            "module": "src.consumer",
             "console": "integratedTerminal",
-            "justMyCode": true,
-            "cwd": "${workspaceFolder}",
+            "justMyCode": false,
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/src"
+                "CHROMEDRIVER_PATH": "/usr/bin/chromedriver",
+                "RABBITMQ_HOST": "rabbitmq",
+                "RABBITMQ_PORT": "5672"
             },
-            "args": [
-                "tests.${fileBasenameNoExtension}" // Dynamically run the current test file.
-            ]
-        },
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "cwd": "${workspaceFolder}",
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}/src"
-            }
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

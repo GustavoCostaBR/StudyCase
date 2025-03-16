@@ -37,7 +37,7 @@ class Parser:
 
 				urlElement = productUi.find(class_ = cfg.A_URL_CLASS)
 				if urlElement:
-					url =  cfg.BASE_URL.replace("/groceries/en-GB", urlElement["href"])
+					url =  cfg.BASE_URL.replace("/groceries/en-CZ", urlElement["href"])
 				else:
 					continue 
 				
@@ -60,9 +60,12 @@ class Parser:
 				if (pricePerUnit == None) and (pricePerKg == None) and (clubCardPrice == None) and (offerPrice == None):
 					continue
 
-				product = Product(
+				try:
+					product = Product(
 					Name=name, Price=pricePerUnit, PricePerKg=pricePerKg, OfferPrice=offerPrice, OfferPriceClubCard=clubCardPrice, Url = url, DateOfOffer=offerDate, DateOfOfferClubCard=clubCardOfferDate)
-				products.append(product.model_dump())
+					products.append(product.model_dump())
+				except:
+					continue
 
 			return products
 		return None
