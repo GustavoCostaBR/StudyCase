@@ -69,7 +69,7 @@ public class BenchmarkTests : IClassFixture<WebApplicationFactory<Program>>
             sendProductsToQueue.EnsureSuccessStatusCode();
             
             // Wait for 2 minutes to allow additional products to be processed.
-            await Task.Delay(TimeSpan.FromMinutes(2));
+            await Task.Delay(TimeSpan.FromMinutes(1));
 
             // Retrieve all products from the DB via the GET endpoint (assumed route: /Products).
             var products = await _client.GetFromJsonAsync<List<Product>>("/Products");
