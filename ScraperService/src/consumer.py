@@ -29,7 +29,7 @@ def callback(ch, method, properties, body):
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
 def start_consumer():
-    time.sleep(0.5)
+    time.sleep(15)
     connection_params = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT)
     connection = pika.BlockingConnection(connection_params)
     channel = connection.channel()
