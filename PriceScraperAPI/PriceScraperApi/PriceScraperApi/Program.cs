@@ -69,3 +69,5 @@ app.UseAuthorization(); // Enable authorization if you have authentication
 app.MapControllers();   // Enable Controller endpoints.
 
 app.Run();
+
+public partial class Program {}

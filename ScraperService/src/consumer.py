@@ -28,7 +28,7 @@ def callback(ch, method, properties, body):
 
 def start_consumer():
     # Use the connection parameters from config.
-    time.sleep(15)
+    time.sleep(0.5)
     connection_params = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT)
     connection = pika.BlockingConnection(connection_params)
     channel = connection.channel()

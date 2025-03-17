@@ -81,6 +81,11 @@ namespace PriceScraperApi.Controllers
                 return BadRequest($"Invalid Product data: {ex.Message}");
             }
 
+            foreach (var product in products)
+            {
+                product.Timestamp = DateTime.UtcNow;
+            }
+            
             try
             {
                 await _productService.CreateProducts(products);

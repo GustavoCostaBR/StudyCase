@@ -11,7 +11,6 @@ class Product(BaseModel):
     Url: str
     DateOfOffer: Optional[datetime] = None
     DateOfOfferClubCard: Optional[datetime] = None
-    Timestamp: datetime = datetime.now()  # Auto-populate timestamp
 
     def to_dictionary(self) -> dict:
         """
@@ -23,6 +22,5 @@ class Product(BaseModel):
             data['DateOfOffer'] = data['DateOfOffer'].isoformat()
         if 'DateOfOfferClubCard' in data and data['DateOfOfferClubCard']:
             data['DateOfOfferClubCard'] = data['DateOfOfferClubCard'].isoformat()
-        if 'Timestamp' in data and data['Timestamp']:
-            data['Timestamp'] = data['Timestamp'].isoformat()
+
         return data
