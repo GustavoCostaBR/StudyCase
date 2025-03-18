@@ -1,7 +1,7 @@
 import pika
 import json
 import time
-import concurrent.futures  # Added for threading
+import concurrent.futures
 from src.config import RABBITMQ_HOST, RABBITMQ_PORT
 from src.program import ScraperService
 
@@ -10,10 +10,8 @@ executor = concurrent.futures.ThreadPoolExecutor(max_workers=10)  # Adjust as ne
 
 def callback(ch, method, properties, body):
     try:
-        # Assume the message is a JSON list of search terms.
         search_terms = json.loads(body.decode('utf-8'))
 
-        # If search_terms is a list, submit each search to the thread pool.
         if isinstance(search_terms, list):
             for search_term in search_terms:
                 print("Received search term:", search_term)
@@ -35,6 +33,7 @@ def start_consumer():
     channel = connection.channel()
     queue_name = "product_queue"
     channel.queue_declare(queue=queue_name, durable=False)
+    channel.basic_qos(prefetch_count=10)
     channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=False)
     print(f"Waiting for messages on queue '{queue_name}' (RabbitMQ host: {RABBITMQ_HOST})...")
     try:
@@ -45,4 +44,7 @@ def start_consumer():
     connection.close()
 
 if __name__ == "__main__":
-    start_consumer()
+    try:
+        start_consumer()
+    finally:
+        executor.shutdown(wait=False)
