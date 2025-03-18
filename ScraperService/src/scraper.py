@@ -5,10 +5,10 @@ from src.models import Product
 
 
 class Scraper:
-	def __init__(self, url: str, class_name: str):
+	def __init__(self, url: str, class_name: str, pool):
 		self.url = url
 		self.class_name = class_name
-		self.fetcher = Fetcher(url, class_name)
+		self.fetcher = Fetcher(url, class_name, pool)
 		self.parser = Parser(class_name)
 
 	def scrape(self) -> Optional[str]:

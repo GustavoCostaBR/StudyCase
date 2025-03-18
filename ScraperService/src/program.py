@@ -12,14 +12,14 @@ class ScraperService:
     DIV_PRODUCT_DETAILS_CLASS = DIV_PRODUCT_DETAILS_CLASS
 
     @classmethod
-    def search(cls, search_term: str) -> None:
+    def search(cls, search_term: str, driver_pool) -> None:
         """
         Perform the scraping based on the given search term and send the result to the API.
 
         Args:
             search_term (str): The search term or product query.
         """
-        scraper = Scraper(cls.SEARCH_URL + search_term, cls.DIV_PRODUCT_DETAILS_CLASS)
+        scraper = Scraper(cls.SEARCH_URL + search_term, cls.DIV_PRODUCT_DETAILS_CLASS, driver_pool)
         products = scraper.searchAndScrape()
         
         if products:
