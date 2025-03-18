@@ -11,22 +11,29 @@ from src.driverPool import DriverPool
 
 
 class Fetcher:
-    def __init__(self, url: str, class_name: str, pool):
-        self.url = url
-        self.class_name = class_name
-        self.pool = pool
+	def __init__(self, url: str, class_name: str, pool):
+		self.url = url
+		self.class_name = class_name
+		self.pool = pool
 
-    def fetch_html(self) -> Optional[str]:
-        driver = self.pool.get_driver()
-        try:
-            driver.get(self.url)
-            WebDriverWait(driver, 20).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, self.class_name))
-            )
-            html_content = driver.page_source
-            return html_content
-        except Exception as e:
-            print(f"Error fetching {self.url}: {e}")
-            return None
-        finally:
-            self.pool.return_driver(driver)
+	def fetch_html(self) -> Optional[str]:
+		driver = self.pool.get_driver()
+		try:
+			driver.get(self.url)
+			WebDriverWait(driver, 20).until(
+				EC.presence_of_all_elements_located((By.CLASS_NAME, self.class_name))
+			)
+			html_content = driver.page_source
+			return html_content
+		except Exception as e:
+			print(f"Error fetching {self.url}: {e}")
+			return None
+		finally:
+			try:
+			# Reset the driver state
+				driver.delete_all_cookies()
+				driver.execute_script("window.localStorage.clear(); window.sessionStorage.clear();")
+				driver.get("about:blank")
+			except Exception as reset_error:
+				print(f"Error resetting driver: {reset_error}")
+			self.pool.return_driver(driver)
